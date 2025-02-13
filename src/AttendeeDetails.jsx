@@ -92,7 +92,7 @@ export default function AttendeeDetails() {
   };
 
   const goToTicketPage = () => {
-    navigate('/ticket', { state: formData });  // No need to set localStorage here again; it's already done in handleSubmit.
+    navigate('/ticket', { state: formData }); 
   };
 
   const handleSubmit = async (e) => {
@@ -163,57 +163,53 @@ export default function AttendeeDetails() {
   };
 
   return (
-    <div className="min-h-screen bg-teal-950 flex items-center justify-center py-12 px-6">
-      <div className="max-w-xl w-full bg-teal-950 p-8 border-2 border-teal-900 rounded-md shadow-lg">
+    <div className="min-h-screen bg-teal-950 flex items-center justify-center p-4 sm:p-6 md:p-8 lg:p-12">
+    <div className="w-full max-w-xl bg-teal-950 p-4 sm:p-6 md:p-8 border-2 border-teal-900 rounded-md shadow-lg">
       <div className="mb-4">
-      <div className="flex justify-between items-center">
-        <h2 className="text-xl font-bold text-white">Attendee Details</h2>
-        <span className="text-sm text-gray-300">Step 2/3</span>
+        <div className="flex justify-between items-center">
+          <h2 className="text-lg sm:text-xl md:text-2xl font-bold text-white">Attendee Details</h2>
+          <span className="text-xs sm:text-sm text-gray-300">Step 2/3</span>
+        </div>
+        <div className="mt-2 w-full bg-teal-900 h-1 rounded-full overflow-hidden">
+          <div className="bg-teal-400 h-full" style={{ width: '66%' }}></div>
+        </div>
       </div>
-      <div className="mt-2 w-full bg-teal-900 h-1 rounded-full overflow-hidden">
-        <div className="bg-teal-400 h-full" style={{ width: '66%' }}></div>
-      </div>
-    </div>
-        <div className="border-2 border-teal-900 py-7 px-10 rounded-md bg-teal-900">
-          <form onSubmit={handleSubmit}>
-            <h2 className="text-white rounded mb-2">Upload Profile Photo</h2>
-            <div
-                  className={`border-2 rounded-lg bg-teal-950 p-10 sm:p-16 md:p-20 mb-6 ${
-                    isDragging ? 'border-teal-500 bg-teal-900' : 'border-teal-800'
-                  }`}
-                  onDragOver={(e) => {
-                    e.preventDefault();
-                    setIsDragging(true);
-                  }}
-                  onDragLeave={() => setIsDragging(false)}
-                  onDrop={handleFileDrop}
-                >
-                  {formData.avatarUrl ? (
-                    <img
-                      src={formData.avatarUrl}
-                      alt="Uploaded"
-                      className="w-20 h-20 sm:w-32 sm:h-32 object-cover rounded-md mx-auto"
-                    />
-                  ) : (
-                    <div className="text-center text-white bg-teal-800 py-6 px-4 sm:py-10 sm:px-6">
-                      <label htmlFor="avatarUpload" className="flex flex-col items-center cursor-pointer">
-                        <HiOutlineCloudDownload size={32} className="text-white mb-3" />
-                        <p className="text-sm sm:text-base">Drag & drop or click to upload</p>
-                      </label>
-                      <input
-                        type="file"
-                        accept="image/*"
-                        className="hidden"
-                        id="avatarUpload"
-                        onChange={handleFileChange}
-                      />
-                    </div>
-                  )}
-                  {errors.avatarUrl && <p className="text-red-500 text-sm mt-2">{errors.avatarUrl}</p>}
-                </div>
 
-            <div className="mb-4">
-              <label htmlFor="fullName" className="block text-gray-300 mb-1">
+      <div className="border-2 border-teal-900 py-4 sm:py-5 md:py-7 px-4 sm:px-6 md:px-10 rounded-md bg-teal-900">
+        <form onSubmit={handleSubmit}>
+          <h2 className="text-white text-sm sm:text-base md:text-lg rounded mb-2">Upload Profile Photo</h2>
+          <div
+            className={`border-2 rounded-lg bg-teal-950 p-6 sm:p-10 md:p-16 mb-6 ${
+              isDragging ? 'border-teal-500 bg-teal-900' : 'border-teal-800'
+            }`}
+            onDragOver={(e) => {
+              e.preventDefault();
+              setIsDragging(true);
+            }}
+            onDragLeave={() => setIsDragging(false)}
+            onDrop={handleFileDrop}
+          >
+            {formData.avatarUrl ? (
+              <img
+                src={formData.avatarUrl}
+                alt="Uploaded"
+                className="w-16 h-16 sm:w-24 sm:h-24 md:w-32 md:h-32 object-cover rounded-md mx-auto"
+              />
+            ) : (
+              <div className="text-center text-white bg-teal-800 rounded-lg p-3 sm:p-4 md:p-6">
+                <label htmlFor="avatarUpload" className="flex flex-col items-center cursor-pointer">
+                  <HiOutlineCloudDownload className="w-6 h-6 sm:w-8 sm:h-8 md:w-10 md:h-10 mb-2" />
+                  <p className="text-xs sm:text-sm md:text-base">Drag & drop or click to upload</p>
+                </label>
+                <input type="file" accept="image/*" className="hidden" id="avatarUpload" onChange={handleFileChange} />
+              </div>
+            )}
+            {errors.avatarUrl && <p className="text-red-500 text-xs sm:text-sm mt-2">{errors.avatarUrl}</p>}
+          </div>
+
+          <div className="space-y-4">
+            <div>
+              <label htmlFor="fullName" className="block text-gray-300 text-sm sm:text-base mb-1">
                 Enter your name
               </label>
               <input
@@ -222,13 +218,13 @@ export default function AttendeeDetails() {
                 name="fullName"
                 value={formData.fullName}
                 onChange={handleChange}
-                className="w-full px-4 py-2 bg-transparent border-2 border-teal-800 text-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-teal-500"
+                className="w-full px-3 sm:px-4 py-2 bg-transparent border-2 border-teal-800 text-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-teal-500 text-sm sm:text-base"
               />
-              {errors.fullName && <p className="text-red-500 text-sm mt-2">{errors.fullName}</p>}
+              {errors.fullName && <p className="text-red-500 text-xs sm:text-sm mt-1">{errors.fullName}</p>}
             </div>
 
-            <div className="mb-4">
-              <label htmlFor="email" className="block text-gray-300 mb-1">
+            <div>
+              <label htmlFor="email" className="block text-gray-300 text-sm sm:text-base mb-1">
                 Enter your email
               </label>
               <input
@@ -237,13 +233,13 @@ export default function AttendeeDetails() {
                 name="email"
                 value={formData.email}
                 onChange={handleChange}
-                className="w-full px-4 py-2 bg-transparent border-2 border-teal-800 text-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-teal-500"
+                className="w-full px-3 sm:px-4 py-2 bg-transparent border-2 border-teal-800 text-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-teal-500 text-sm sm:text-base"
               />
-              {errors.email && <p className="text-red-500 text-sm mt-2">{errors.email}</p>}
+              {errors.email && <p className="text-red-500 text-xs sm:text-sm mt-1">{errors.email}</p>}
             </div>
 
-            <div className="mb-6">
-              <label htmlFor="about" className="block text-gray-300 mb-1">
+            <div>
+              <label htmlFor="about" className="block text-gray-300 text-sm sm:text-base mb-1">
                 About the Project
               </label>
               <textarea
@@ -252,31 +248,31 @@ export default function AttendeeDetails() {
                 rows="4"
                 value={formData.about}
                 onChange={handleChange}
-                className="w-full px-4 py-2 bg-transparent border-2 border-teal-800 text-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-teal-500"
+                className="w-full px-3 sm:px-4 py-2 bg-transparent border-2 border-teal-800 text-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-teal-500 text-sm sm:text-base"
               />
-              {errors.about && <p className="text-red-500 text-sm mt-2">{errors.about}</p>}
+              {errors.about && <p className="text-red-500 text-xs sm:text-sm mt-1">{errors.about}</p>}
             </div>
+          </div>
 
-            <div className="flex flex-col md:flex-row md:justify-between md:space-x-5 space-y-4 md:space-y-0">
-                  <button
-                    type="button"
-                    onClick={() => navigate(-1)}
-                    className="w-full md:w-1/2 px-6 py-3 border-2 border-teal-600 text-gray-300 rounded hover:border-teal-500"
-                  >
-                    Back
-                  </button>
-                  <button
-                    type="submit"
-                    onClick={goToTicketPage}
-                    className="w-full md:w-1/2 px-6 py-3 bg-teal-600 text-white rounded hover:bg-teal-500"
-                  >
-                    Get my free ticket
-                  </button>
-            </div>
-
-          </form>
-        </div>
+          <div className="flex flex-col sm:flex-row justify-between space-y-3 sm:space-y-0 sm:space-x-4 mt-6">
+            <button
+              type="button"
+              onClick={() => navigate(-1)}
+              className="w-full sm:w-1/2 px-4 sm:px-6 py-2 sm:py-3 border-2 border-teal-600 text-gray-300 rounded hover:border-teal-500 text-sm sm:text-base"
+            >
+              Back
+            </button>
+            <button
+              type="submit"
+              onClick={goToTicketPage}
+              className="w-full sm:w-1/2 px-4 sm:px-6 py-2 sm:py-3 bg-teal-600 text-white rounded hover:bg-teal-500 text-sm sm:text-base"
+            >
+              Get my free ticket
+            </button>
+          </div>
+        </form>
       </div>
     </div>
+  </div>
   );
 }
